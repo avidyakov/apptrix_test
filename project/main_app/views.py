@@ -6,12 +6,13 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.viewsets import GenericViewSet
 
 from .models import User
-from .serializers import RegisterSerializer
+from .serializers import UserSerializer
 
 
-class UserViewSet(mixins.CreateModelMixin, GenericViewSet):
+class UserViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, GenericViewSet):
     queryset = User.objects.all()
-    serializer_class = RegisterSerializer
+    serializer_class = UserSerializer
+    filterset_fields = ['first_name', 'last_name', 'sex']
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
     def match(self, request, pk=None):
