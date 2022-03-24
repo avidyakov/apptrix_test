@@ -95,3 +95,22 @@ AUTH_USER_MODEL = 'main_app.User'
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+EMAIL_HOST = 'smtp.mail.ru'
+
+EMAIL_PORT = 2525
+
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+EMAIL_USE_TLS = True
+
+EMAIL_USE_SSL = False

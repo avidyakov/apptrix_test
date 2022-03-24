@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.db import models
 
 
@@ -8,7 +10,10 @@ class User(AbstractUser):
     sex = models.BooleanField()
     username = None
 
-    matches = models.ManyToManyField('main_app.User')
+    matches = models.ManyToManyField('main_app.User', related_name='matched')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    def notify(self, email):
+        send_mail('Новая симпатия', f'Вы понравились {email}', settings.EMAIL_HOST_USER, [self.email])
