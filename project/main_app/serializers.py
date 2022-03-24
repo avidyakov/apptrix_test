@@ -1,4 +1,4 @@
-# from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageDraw, Image
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
@@ -17,7 +17,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'sex')
+        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'sex', 'avatar')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -34,17 +34,16 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            sex=validated_data['sex']
+            sex=validated_data['sex'],
+            avatar=validated_data['avatar']
         )
 
         user.set_password(validated_data['password'])
         user.save()
 
-        # photo = Image.open(validated_data['avatar'])
-        # drawing = ImageDraw.Draw(photo)
-        # black = (3, 8, 12)
-        # font = ImageFont.truetype("Pillow/Tests/fonts/FreeMono.ttf", 40)
-        # drawing.text((5, 5), 'watermark', fill=black, font=font)
-        # photo.save(output_image_path)
+        photo = Image.open(user.avatar)
+        drawing = ImageDraw.Draw(photo)
+        drawing.text((5, 5), 'watermark')
+        photo.save(user.avatar.path)
 
         return user
