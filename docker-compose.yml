@@ -2,7 +2,7 @@ version: "3"
 
 services:
   database:
-    image: postgres:13.4-alpine
+    image: postgis/postgis:13-3.2-alpine
     volumes:
       - database_data:/var/lib/postgresql/data
     env_file:

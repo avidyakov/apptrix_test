@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'sex', 'avatar')
+        fields = ('email', 'password', 'password2', 'first_name', 'last_name', 'sex', 'avatar', 'location')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -35,7 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
             sex=validated_data['sex'],
-            avatar=validated_data['avatar']
+            avatar=validated_data['avatar'],
+            location=validated_data['location']
         )
 
         user.set_password(validated_data['password'])
