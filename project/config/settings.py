@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'django_filters',
     'django_extensions',
+    'drf_yasg',
 
     'main_app.apps.MainAppConfig',
 ]

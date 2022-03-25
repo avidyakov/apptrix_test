@@ -1,6 +1,6 @@
 # Apptrix test task
 
-Тестовое задание apptrix
+Тестовое задание apptrix https://docs.google.com/document/d/1LpUf2cZdtDAZKgDP9zw7i8Qn98r7og0p8QqizZkMfhE/edit
 
 ## Installation
 
@@ -24,3 +24,7 @@ docker compose exec web python manage.py migrate
 ```bash
 docker compose up
 ```
+
+## Docs
+
+http://107.174.244.50:8000/docs/
